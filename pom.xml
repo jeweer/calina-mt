@@ -170,11 +170,6 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.7</version>
 		</dependency>
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.4.0</version>
-		</dependency>
 		
 		<!-- end of database -->
 		
@@ -231,11 +226,6 @@
 	      <artifactId>jackson-dataformat-xml</artifactId>
 	      <version>2.4.4</version>
     	</dependency>
-    	<dependency>
-		  <groupId>com.saic</groupId>
-		  <artifactId>oath-sdk</artifactId>
-		  <version>1.0</version>
-		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
