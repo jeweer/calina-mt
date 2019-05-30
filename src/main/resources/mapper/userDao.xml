@@ -3,10 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.springmvc.services.dao.SchoolDao">
+<mapper namespace="com.springmvc.services.dao.UserDao">
 
 	<!-- 映射JavaBean对象和数据库字段的对映 -->
-	<resultMap id="school" type="com.springmvc.services.model.School">
+	<resultMap id="user" type="com.springmvc.services.model.User">
 		<id column="ID" jdbcType="INTEGER" property="id" />
 		<result column="name" jdbcType="VARCHAR" property="name" />
 		<result column="address" jdbcType="VARCHAR" property="address" />
@@ -15,8 +15,8 @@
 
 	
 	<!-- 用户管理 -->
-	<select id="selectschool" resultMap="school">
-		select * from school
+	<select id="selectUser" resultMap="user">
+		select * from user
 	</select>
 
 	
