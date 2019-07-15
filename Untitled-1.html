@@ -1,0 +1,155 @@
+<!-- script代码，如果需要引用js文件，请使用与HTML中相同的方式。 -->
+<style>
+	.btn_img_span {
+		
+	}
+	.left_div{
+		width: 4%;
+    	display: inline-block;
+	}
+	.right_div{
+		width: 95%;
+    	
+		display: inline-block;
+	}
+	.date-container_ {
+		text-align: left;
+	}
+	.date_tool > span{
+		display: none !important;
+	}
+	.date-btn_ {
+		vertical-align: middle;
+	}
+</style>
+<script type="text/javascript">
+
+	var gjjl ="field8496";/*高级经理*/
+
+	var user_id = "field8492"; /*用户编号*/
+	var ks = "field8502"; /*科室*/
+	var date_tool = 'field8686_';
+	var SelectedLeaveDates = [];
+	
+	jQuery(function() {
+		var userid = jQuery("#" + user_id).val();
+		var canEdit=jQuery("#"+gjjl+"__").attr("type")=="text";
+		
+		initValuegzxx(userid);
+		setTimeout(function(){
+            bindaddbutton0(canEdit);
+        },1000);
+
+    });
+    window.onload = function(){
+       
+    }
+	function bindaddbutton0(canEdit_){
+		jQuery(".date_tool").each(function() {
+			var id = jQuery("input", this).attr('id');
+			if(jQuery(this).find('.date-container').length < 1) {
+				initJBRQ_Btn(this, id,canEdit_);
+			}
+		});
+		jQuery("button[name='addbutton0']").bind("click", function() {
+			jQuery(".date_tool").each(function() {
+				var id = jQuery("input", this).attr('id');
+				if(jQuery(this).find('.date-container').length < 1) {
+					initJBRQ_Btn(this, id,canEdit_);
+				}
+			});
+		});
+	}
+	function initValuegzxx(userid) {
+
+		jQuery.ajax({
+			type: "get",
+			dataType: "json",
+			url: "/mobilemode/apps/document/xinxi.jsp?action=gzxx&userid=" + userid,
+			cache: false,
+			async: false,
+			success: function(data) {
+				if(data.length > 0) {
+					jQuery("#" + ks).val(data[0]["groupdef28"]);
+					jQuery("#" + ks + "span").html(data[0]["groupdef28"]);
+				}
+			}
+		});
+	}
+	/**
+	 * 日历图标添加事件
+	 * fieldid
+	 */
+	function initJBRQ_Btn(obj, fieldid,canEdit_) {
+		var button = document.createElement('button');
+		button.setAttribute('class', 'date-btn calendar');
+		button.setAttribute('type', 'button');
+		button.setAttribute('onclick', 'initTimeInput(\'' + fieldid + '\')');
+		var div = document.createElement('div');
+		div.setAttribute('class', 'date-container');
+		if(canEdit_){
+				div.appendChild(button);
+		}
+		var span = document.createElement('span');
+		span.setAttribute('id', 'date_span_' + fieldid);
+		var date = jQuery(obj).prev('td').find('input').val();
+		if(date == '') {
+			var img = document.createElement('img');
+			img.setAttribute('src', '/images/BacoError_wev8.gif');
+			img.setAttribute('align', 'absmiddle');
+			span.appendChild(img);
+		}else{
+			span.innerHTML=date;
+		}
+		div.appendChild(span);
+		jQuery(obj).append(div);
+
+	}
+
+	function initTimeInput(fieldid) {
+		WdatePicker({
+			el: "date_span_" + fieldid,
+			vel:fieldid,
+			minDate: '%y-%M-%d',
+			onclearing: clearingFunc,
+			oncleared: function(){
+				oncleared(fieldid);
+			},
+			onpicking: function(dp) {
+			},
+			onpicked: function(dp1){
+				onpicked(fieldid,dp1);
+			},
+		});
+	}
+
+	function clearingFunc() {
+
+	}
+
+	function onpicked(fieldid,dp) {
+		var preTD = jQuery("#" + fieldid).val(dp.cal.getDateStr()).parents('.date_tool').prev('td');
+		preTD.find('input').val(dp.cal.getDateStr());
+		preTD.find('span').html(dp.cal.getDateStr());
+		jQuery("#date_span_" + fieldid).html(dp.cal.getDateStr());
+	}
+
+	function oncleared(fieldid) {
+		var preTD = jQuery("#" + fieldid).val('').parents('.date_tool').prev('td');
+		preTD.find('input').val('');
+		preTD.find('span').html('');
+		jQuery("#date_span_" + fieldid).html('<img src="/images/BacoError_wev8.gif" align="absmiddle">');
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
