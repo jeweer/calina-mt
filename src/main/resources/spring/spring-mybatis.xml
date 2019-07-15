@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-	<context:property-placeholder location="classpath*:/properties/*.properties" />
+	<context:property-placeholder location="classpath*:/properties/jdbc.properties" />
 	<!-- 引入数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init">

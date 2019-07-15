@@ -2,7 +2,7 @@ package com.springmvc.services.model;
 
 import java.io.Serializable;
 
-public class School implements Serializable {
+public class User implements Serializable {
 
 	/**
 	 * 

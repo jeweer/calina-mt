@@ -13,12 +13,15 @@
       http://mybatis.org/schema/mybatis-spring 
       http://mybatis.org/schema/mybatis-spring.xsd">
     
-    <!--YUJUNFENG 将接口dao.UserDAO转换成bean  -->
-    <bean id = "schoolDao" class = "org.mybatis.spring.mapper.MapperFactoryBean">
-    	<property name = "mapperInterface" value = "com.springmvc.services.dao.SchoolDao"></property>
+    <!-- 将接口dao.UserDAO转换成bean  -->
+    <bean id = "userDao" class = "org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name = "mapperInterface" value = "com.springmvc.services.dao.UserDao"></property>
     	<property name = "sqlSessionFactory" ref = "sqlSessionFactory"></property>
     </bean>
     
-    
+     <bean id = "departmentDao" class = "org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name = "mapperInterface" value = "com.springmvc.services.dao.DepartmentDao"></property>
+    	<property name = "sqlSessionFactory" ref = "sqlSessionFactory"></property>
+    </bean>
    
 </beans>

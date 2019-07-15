@@ -17,30 +17,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springmvc.services.model.School;
-import com.springmvc.services.service.SchoolService;
+import com.springmvc.services.model.User;
+import com.springmvc.services.service.UserService;
 import com.springmvc.util.JSONUtilAction;
+
+import io.swagger.annotations.Api;
 
 
 @Controller
-@RequestMapping("/school")
-public class SchoolController extends JSONUtilAction{
-	public SchoolService schoolservice;
+@Api(tags = "用户信息接口")
+@RequestMapping("/user")
+public class UserController extends JSONUtilAction{
+	public UserService userService;
     
-	public SchoolService getSchoolservice() {
-		return schoolservice;
+	public UserService getUserService() {
+		return userService;
 	}
 	@Autowired
-	public void setSchoolservice(SchoolService schoolservice) {
-		this.schoolservice = schoolservice;
+	public void setSchoolservice(UserService schoolservice) {
+		this.userService = schoolservice;
 	}
 
 
-	@RequestMapping(value = "/school", produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/userList", produces = "application/json;charset=UTF-8")
 	@ResponseBody
  public void queryDate(HttpServletRequest request, HttpServletResponse response) {
 		
-        List<School> list = schoolservice.selectschool();
+        List<User> list = userService.select();
         if(list != null && list.size()>0){
 	        ObjectMapper mapper = new ObjectMapper();
 	        String result="";
@@ -61,11 +64,12 @@ public class SchoolController extends JSONUtilAction{
 		model.setViewName("schoollist");
 	
 		
-        List<School> list = schoolservice.selectschool();
+        List<User> list = userService.select();
     	model.addObject("schoollist", list);
     
     	return model;
     }
+
 	@RequestMapping(value = "/index1", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public ModelAndView queryschool2(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -73,7 +77,7 @@ public class SchoolController extends JSONUtilAction{
 		model.setViewName("schoollist1");
 	
 		
-        List<School> list = schoolservice.selectschool();
+        List<User> list = userService.select();
     	model.addObject("schoollist1", list);
     	return model;
     }
